@@ -1,5 +1,5 @@
 /videoaulas
 /livros
 /vinhos/artigos/*
-!vinhos/artigos//.gitkeep 
+!/vinhos/artigos/.gitkeep 
 
