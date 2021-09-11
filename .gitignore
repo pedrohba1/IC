@@ -2,4 +2,4 @@
 /livros
 /vinhos/artigos/*
 !/vinhos/artigos/.gitkeep 
-
+/artigos
