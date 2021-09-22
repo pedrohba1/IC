@@ -2,16 +2,18 @@ import numpy as np
 from random import seed
 from random import randint
 
-CHESSBOARD_DIMENSION = 8
-N = CHESSBOARD_DIMENSION
+N = 10
 
-chessBoard = np.array([x+1 for x in range(N*N)])
-chessBoard = chessBoard.reshape(N,N)
 
 def dominatedSet(queens, chessBoard, verbose=False):
     S = set()
+
     N = chessBoard.shape[0]
 
+    if verbose:
+        print('tabuleiro que chega no dominatedSet')
+        print(chessBoard)
+    
     for queen in queens:
         queenBox = queen
         queenPosition = np.where(chessBoard == queenBox)
@@ -43,27 +45,9 @@ def dominatedSet(queens, chessBoard, verbose=False):
                 S.update(invertDiag)
     return S
 
-def crossover(parents, verbose=False):
-    DNA_SIZE = 8
-    individual1 = parents[0]
-    individual2 =  parents[1]
-    n_queens = individual1.shape[0]
-    crossedIndividuals = np.empty((1,n_queens), dtype='str')
-    if verbose: print('pais', parents)
-    for i in range(0, n_queens):
-        pos = randint(1, DNA_SIZE-1)
-        if verbose: print('posição de troca: ', pos)
-        dna1=individual[i]
-        dna2=individual2[i]
-        generated1, generated2 = (dna1[:pos]+dna2[pos:], dna2[:pos]+dna1[pos:])
-        generated1 = validate_dna(generated1)
-        generated2 = validate_dna(generated2)
-        crossedIndividuals = np.vstack([crossedIndividuals, [generated1, generated2]])
-    crossedIndividuals = np.delete(crossedIndividuals,0, 0)
-    return crossedIndividuals
 
-
-def gen_individuals(N_queens, N, N_individuals): 
+def gen_individuals(N_queens, N, N_individuals, verbose=True): 
+    print('')
     A = np.empty((1,N_queens), dtype='str')
     for i in range (0,N_individuals):
         newRow = []
@@ -91,7 +75,8 @@ def darwinize_individual(ind, chessBoard):
     return len(S)/ (N*N) 
 
 
-def getFitness(population, verbose=False):
+
+def getFitness(population, chessBoard, verbose=False):
     fitness_values = np.empty((1), dtype='int64')
     for indi in population:
         if verbose: print('individo no getFitness', indi)
@@ -101,9 +86,10 @@ def getFitness(population, verbose=False):
     return fitness_values
 
 
-def moreAdapted(population):
+
+def moreAdapted(population, chessBoard):
     n_queens = population.shape[1]
-    fitness_values = getFitness(population)
+    fitness_values = getFitness(population, chessBoard)
 
     # Selecionará os 50% individuos com maior fitness_values
     n_ind = len(population)
@@ -121,8 +107,9 @@ def moreAdapted(population):
     fit = fit[0:int(n_ind/2)]
     return individuals
 
-def roulette_wheel(population):
-    fitness_values = getFitness(population)
+
+def roulette_wheel(population, chessBoard):
+    fitness_values = getFitness(population, chessBoard)
 
     y = fitness_values.astype(np.float)
     Soma = np.sum(y)
@@ -138,7 +125,10 @@ def roulette_wheel(population):
 
 
 def validate_dna(dna, verbose=False):
-    if verbose: print('valida o dna')
+    # N é variaǘel global, tome cuidado
+    if verbose: 
+        print('valida o dna')
+        print('dimensão', N)
     dnaInInt = int(dna,2)
     
     if verbose: print('valor anterior: ', dnaInInt)
@@ -154,6 +144,7 @@ def validate_dna(dna, verbose=False):
         return dna
     else: return dna    
 
+
 def crossover(parents, verbose=False):
     DNA_SIZE = 8
     individual1 = parents[0]
@@ -161,6 +152,8 @@ def crossover(parents, verbose=False):
     n_queens = individual1.shape[0]
     crossedIndividuals = np.empty((1,n_queens), dtype='str')
     if verbose: print('pais', parents)
+    DNA1 = []
+    DNA2 = []
     for i in range(0, n_queens):
         pos = randint(1, DNA_SIZE-1)
         if verbose: print('posição de troca: ', pos)
@@ -168,10 +161,14 @@ def crossover(parents, verbose=False):
         dna2=individual2[i]
         generated1, generated2 = (dna1[:pos]+dna2[pos:], dna2[:pos]+dna1[pos:])
         generated1 = validate_dna(generated1)
+        DNA1.append(generated1)
         generated2 = validate_dna(generated2)
-        crossedIndividuals = np.vstack([crossedIndividuals, [generated1, generated2]])
+        DNA2.append(generated2)
+    crossedIndividuals = np.vstack([crossedIndividuals, [DNA1, DNA2]])
     crossedIndividuals = np.delete(crossedIndividuals,0, 0)
     return crossedIndividuals
+
+
 
 def mutate(individual, verbose=False, debug=False):
     DNA_SIZE = 8
@@ -196,7 +193,7 @@ def mutate(individual, verbose=False, debug=False):
         if verbose: print('após a mutação', mutatedIndividual)
         return mutatedIndividual 
     else:
-        return individual   
+        return individual            
 
 
 def do_iterations(n_iters, n_queens, chessBoard_dimension):
@@ -210,13 +207,13 @@ def do_iterations(n_iters, n_queens, chessBoard_dimension):
     i = 1
     while i <= n_iters:
         # já filtra o top 50%
-        A = moreAdapted(A)  
+        A = moreAdapted(A, chessBoard)  
         
         # vamos gerar mais 50 indivíduos à partir de 25 pares selecionados de pares com a roleta, e esses pares vão 
         # gerar dois indivíduos cada um. No final temos 100 indivídus.
         parentsSelected = []
         for j in range (0,25):
-            parents = roulette_wheel(A)
+            parents = roulette_wheel(A, chessBoard)
             parentsSelected.append(parents)
         
         # agora fazemos os pais cruzarem. Cada pai vai gerar um par de filhos.
@@ -240,14 +237,10 @@ def do_iterations(n_iters, n_queens, chessBoard_dimension):
         AllIndividuals = np.delete(AllIndividuals,0, 0)
 
 
-        fitness_values = getFitness(AllIndividuals)
+        fitness_values = getFitness(AllIndividuals, chessBoard)
         A = AllIndividuals
         
         print('melhor indivíduo da iteração', i,' :' , fitness_values[np.argmax(fitness_values)])
         print('posição das rainhas do melhor individuo',A[np.argmax(fitness_values)])
         i += 1
     return 1
-
-
-
-do_iterations(10,3,8)
