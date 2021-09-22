@@ -7,7 +7,6 @@ N = 10
 
 def dominatedSet(queens, chessBoard, verbose=False):
     S = set()
-
     N = chessBoard.shape[0]
 
     if verbose:
@@ -196,7 +195,34 @@ def mutate(individual, verbose=False, debug=False):
         return individual            
 
 
-def do_iterations(n_iters, n_queens, chessBoard_dimension):
+def show_dominated_board(individuo):
+    board = np.array([x+1 for x in range(N*N)])
+    board = board.reshape(N,N)
+    boardArr = [x+1 for x in range(N*N)]
+
+    listOfInt = []
+    for crom in individuo:
+        cromyInInt = int(crom, 2)
+        listOfInt.append(cromyInInt)
+    S1 = dominatedSet(listOfInt, board)
+
+
+    for item in list(S1):
+        indexS = boardArr.index(item)
+        boardArr[indexS] = 'D'
+
+    for cromossome in individuo:
+        cromyInInt = int(cromossome, 2)
+        boardArr[cromyInInt-1] = 'R'
+
+
+
+    board = np.array(boardArr)
+    board = board.reshape(N,N)
+    print(board)
+
+
+def do_iterations(n_iters, n_queens, chessBoard_dimension, verbose=False):
     # constrói o tabuleiro
     N = chessBoard_dimension
     chessBoard = np.array([x+1 for x in range(N*N)])
@@ -242,5 +268,6 @@ def do_iterations(n_iters, n_queens, chessBoard_dimension):
         
         print('melhor indivíduo da iteração', i,' :' , fitness_values[np.argmax(fitness_values)])
         print('posição das rainhas do melhor individuo',A[np.argmax(fitness_values)])
+        if verbose: show_dominated_board(A[np.argmax(fitness_values)])
         i += 1
     return 1
