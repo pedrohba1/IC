@@ -213,7 +213,7 @@ def show_dominated_board(individuo):
 
     for cromossome in individuo:
         cromyInInt = int(cromossome, 2)
-        boardArr[cromyInInt-1] = 'R'
+        boardArr[cromyInInt-1] = 'r'
 
 
 
