@@ -228,6 +228,7 @@ def do_iterations(n_iters, n_queens, chessBoard_dimension, verbose=False):
     chessBoard = np.array([x+1 for x in range(N*N)])
     chessBoard = chessBoard.reshape(N,N)
 
+    best = 0
     # gera os primeiros 100 indivíduos:
     A = gen_individuals(n_queens,N,100)
     i = 1
@@ -265,9 +266,12 @@ def do_iterations(n_iters, n_queens, chessBoard_dimension, verbose=False):
 
         fitness_values = getFitness(AllIndividuals, chessBoard)
         A = AllIndividuals
+        actualBest = fitness_values[np.argmax(fitness_values)]
+        if actualBest > best: best = actualBest
         
         print('melhor indivíduo da iteração', i,' :' , fitness_values[np.argmax(fitness_values)])
-        print('posição das rainhas do melhor individuo',A[np.argmax(fitness_values)])
+        print('posição das rainhas do melhor individuo da iteração',A[np.argmax(fitness_values)])
+        print('melhor indivíduo total: ', best)
         if verbose: show_dominated_board(A[np.argmax(fitness_values)])
         i += 1
     return 1
