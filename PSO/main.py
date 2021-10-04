@@ -14,29 +14,15 @@ from Particles import Particles
 # most cases.
 
 
-# For each particle
-#  Initialize particle
-# End
-# Repeat
-#  For each particle
-#  Calculate fitness value
-#  If the fitness value is better than
-# best fitness value (Pid) in history
-#  Set current value as the new Pid
-#  End
-#  Choose the particle with the best
-# fitness value of all the particles as
-# the Pgd
-#  For each particle
-#   copy some individuals from Pgd and change them for the individuals in particle 
-#   Run AG algorithm from this individuals
-# according to equation (2)
-#  End
-# Until Stopping criteria
+# Gera as partíclas
+# Ordena elas pelo actual_score
+# Subtitui o high_score das sub50% pelo highscore das top50%
+# aplica as segintes substituições de velocidade
+   #  substitui as rainhas atuais de cada partícula pelas rainhas do máximo local com probabilidade c1 de substituição
+   #   substitui as rainhas atuais de cada partícula pelas rainhas de máximo global com probabilidade c2    
+# repete o processo
 
 N = 10
-
-
 ps = Particles(10, 6)
 
 for particle in ps.particles:

@@ -19,3 +19,5 @@ class Particles:
     def rank_particles_by_actual_score(self):
         self.particles.sort(key=lambda p: p.actual_score , reverse=True)
 
+    def rank_particles_by_hig_score(self):
+        self.particles.sort(key=lambda p: p.high_score , reverse=True)
