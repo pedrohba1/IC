@@ -39,4 +39,9 @@ N = 10
 
 ps = Particles(10, 6)
 
-for 
+for particle in ps.particles:
+    print(particle.actual_score)
+
+
+ps.particles[0].show_particle()
+

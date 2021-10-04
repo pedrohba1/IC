@@ -14,7 +14,8 @@ class Particles:
             self.particles.append(p)
         self.rank_particles_by_actual_score()
 
-
+    # a ideia dessa função é sempre manter na lista de partículas uma ordem descescrente de score: 
+    # a partícula de maior score atual está na posição 0 e a menor de todas na posição 100
     def rank_particles_by_actual_score(self):
         self.particles.sort(key=lambda p: p.actual_score , reverse=True)
 
