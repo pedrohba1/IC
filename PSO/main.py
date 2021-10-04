@@ -1,4 +1,4 @@
-from Particle import Particle
+from Particles import Particles
 
 # The information
 # sharing mechanism in PSO is significantly
@@ -13,5 +13,30 @@ from Particle import Particle
 # solution quickly even in the local version in
 # most cases.
 
-p = Particle(10, 6)
-p.show_best_individual()
+
+# For each particle
+#  Initialize particle
+# End
+# Repeat
+#  For each particle
+#  Calculate fitness value
+#  If the fitness value is better than
+# best fitness value (Pid) in history
+#  Set current value as the new Pid
+#  End
+#  Choose the particle with the best
+# fitness value of all the particles as
+# the Pgd
+#  For each particle
+#   copy some individuals from Pgd and change them for the individuals in particle 
+#   Run AG algorithm from this individuals
+# according to equation (2)
+#  End
+# Until Stopping criteria
+
+N = 10
+
+
+ps = Particles(10, 6)
+
+for 
