@@ -52,8 +52,8 @@ class Particle:
             maxParticleQueensInInt.append(int(queen,2))
 
         w = 0.5
-        c1 = 1.5 # 40% de chance de mover em direção ao máximo global  
-        c2 = 5 # 20% de chance de mover em direção ao máximo local
+        c1 = 1.5   
+        c2 = 2.5
         tmp_queens = []
         for idx, queen in enumerate(queensInInt):
             r1 = random.randint(1,4)    
