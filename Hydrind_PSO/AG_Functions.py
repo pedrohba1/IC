@@ -2,7 +2,6 @@ import numpy as np
 from random import seed
 from random import randint
 
-N = 10
 
 
 def dominatedSet(queens, chessBoard, verbose=False):
@@ -195,7 +194,7 @@ def mutate(individual, verbose=False, debug=False):
         return individual            
 
 
-def show_dominated_board(individuo):
+def show_dominated_board(individuo, N):
     board = np.array([x+1 for x in range(N*N)])
     board = board.reshape(N,N)
     boardArr = [x+1 for x in range(N*N)]
