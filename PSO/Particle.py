@@ -56,8 +56,8 @@ class Particle:
         c2 = 5 # 20% de chance de mover em direção ao máximo local
         tmp_queens = []
         for idx, queen in enumerate(queensInInt):
-            r1 = random.randint(1,2)    
-            r2 = random.randint(1,2)
+            r1 = random.randint(1,4)    
+            r2 = random.randint(1,4)
 
             self.velocity = w*self.velocity + c1*r1*(localMaxQueenInInt[idx] - queensInInt[idx]) + c2*r2*(maxParticleQueensInInt[idx] - queensInInt[idx])
             queensInInt[idx] = queensInInt[idx] + self.velocity

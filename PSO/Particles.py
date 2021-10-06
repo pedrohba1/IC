@@ -25,12 +25,10 @@ class Particles:
         self.particles.sort(key=lambda p: p.high_score , reverse=True)
 
     def do_iteration(self):
-
         for particle in self.particles:
             particle.move_particle(self.max_particle)
             if particle.actual_score > self.max_particle.high_score:
                 self.max_particle = particle
-
-        print('score máximo atual', self.max_particle.high_score)        
+        # print('score máximo atual', self.max_particle.high_score)        
 
 
