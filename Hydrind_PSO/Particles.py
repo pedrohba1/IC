@@ -25,7 +25,8 @@ class Particles:
         self.particles.sort(key=lambda p: p.high_score , reverse=True)
 
     def do_iteration(self):
-        for particle in self.particles: 
+        for idx, particle in enumerate(self.particles): 
+            # print('iteração ', idx)
             if random.random() < 0.2:
                 particle.mutate_particle()
             particle.move_particle(self.max_particle)

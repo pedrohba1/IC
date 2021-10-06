@@ -35,7 +35,7 @@ class Particle:
 
 
     def mutate_particle(self):
-        self.actual_queens = mutate(self.actual_queens, self.N,  verbose=True)
+        self.actual_queens = mutate(self.actual_queens, self.N,  verbose=False)
 
 
 
