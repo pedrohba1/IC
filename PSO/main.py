@@ -22,13 +22,12 @@ from Particles import Particles
    #   substitui as rainhas atuais de cada partícula pelas rainhas de máximo global com probabilidade c2    
 # repete o processo
 
-N = 10
-ps = Particles(10, 6)
-
-for particle in ps.particles:
-    print(particle.actual_score)
-
+ps = Particles(9, 5)
 
 
 for i in range(0,1000):
     ps.do_iteration()
+
+
+ps.rank_particles_by_hig_score()
+ps.particles[0].show_particle()
