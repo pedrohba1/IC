@@ -122,7 +122,7 @@ def roulette_wheel(population, chessBoard):
     return ind
 
 
-def validate_dna(dna, verbose=False):
+def validate_dna(dna, N, verbose=False):
     # N é variaǘel global, tome cuidado
     if verbose: 
         print('valida o dna')
@@ -168,30 +168,28 @@ def crossover(parents, verbose=False):
 
 
 
-def mutate(individual, verbose=False, debug=False):
+def mutate(individual, N,verbose=False, debug=False):
     DNA_SIZE = 8
     top = 100
     if debug: top = 1
-    if(randint(1,top) <= 5):
-        mutatedIndividual =[]
-        for DNA in individual:
-                if verbose: print('antes da mutação', DNA)
-                DNA = list(DNA)
-                # pode acontecer de mudar a mesma posição duas vezes. Acho que não tem problema
-                pos1 = randint(0, DNA_SIZE-1)
-                pos2 =  randint(0, DNA_SIZE-1)
-                if verbose: print('mudou as posições:', pos1, pos2)
-                if DNA[pos1] == "1": DNA[pos1] = "0"
-                elif DNA[pos1] == "0": DNA[pos1] = "1"
-                if DNA[pos2] == "1": DNA[pos2] = "0"
-                elif DNA[pos2] == "0": DNA[pos2] = "1" 
-                DNAinString = "".join(DNA)
-                DNA = validate_dna(DNAinString)
-                mutatedIndividual.append(DNA)
-        if verbose: print('após a mutação', mutatedIndividual)
-        return mutatedIndividual 
-    else:
-        return individual            
+    mutatedIndividual =[]
+    for DNA in individual:
+            if verbose: print('antes da mutação', DNA)
+            DNA = list(DNA)
+            # pode acontecer de mudar a mesma posição duas vezes. Acho que não tem problema
+            pos1 = randint(0, DNA_SIZE-1)
+            pos2 =  randint(0, DNA_SIZE-1)
+            if verbose: print('mudou as posições:', pos1, pos2)
+            if DNA[pos1] == "1": DNA[pos1] = "0"
+            elif DNA[pos1] == "0": DNA[pos1] = "1"
+            if DNA[pos2] == "1": DNA[pos2] = "0"
+            elif DNA[pos2] == "0": DNA[pos2] = "1" 
+            DNAinString = "".join(DNA)
+            DNA = validate_dna(DNAinString,N)
+            mutatedIndividual.append(DNA)
+    if verbose: print('após a mutação', mutatedIndividual)
+    return mutatedIndividual 
+       
 
 
 def show_dominated_board(individuo, N):

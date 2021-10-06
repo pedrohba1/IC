@@ -1,7 +1,7 @@
 import numpy as np
 from AG_Functions import gen_individuals, darwinize_individual
 from Particle import Particle
-
+import random
 class Particles:
     def __init__(self, N, n_queens):
         self.N = N
@@ -25,7 +25,9 @@ class Particles:
         self.particles.sort(key=lambda p: p.high_score , reverse=True)
 
     def do_iteration(self):
-        for particle in self.particles:
+        for particle in self.particles: 
+            if random.random() < 0.2:
+                particle.mutate_particle()
             particle.move_particle(self.max_particle)
             if particle.actual_score > self.max_particle.high_score:
                 self.max_particle = particle

@@ -1,4 +1,5 @@
 from Particles import Particles
+import time
 
 # The information
 # sharing mechanism in PSO is significantly
@@ -13,8 +14,9 @@ from Particles import Particles
 # solution quickly even in the local version in
 # most cases.
 
-ps = Particles(9, 5)
 
+start  = time.time()
+ps = Particles(9, 5)
 for i in range(0,1000):
     # ps.rank_particles_by_hig_score()
     # print('ranking das partículas')
@@ -22,5 +24,9 @@ for i in range(0,1000):
     #     print(particle.high_score)
     ps.do_iteration()
 
+
 ps.rank_particles_by_hig_score()
 ps.particles[0].show_particle()
+end = time.time()
+print('tempo de execução total', (end - start))
+

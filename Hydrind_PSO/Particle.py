@@ -1,4 +1,4 @@
-from AG_Functions import show_dominated_board, darwinize_individual
+from AG_Functions import show_dominated_board, darwinize_individual, mutate
 import random
 from random import seed
 
@@ -32,6 +32,10 @@ class Particle:
             return queenBin
         queenBin = format(queenInInt,'08b')
         return queenBin
+
+
+    def mutate_particle(self):
+        self.actual_queens = mutate(self.actual_queens, self.N,  verbose=True)
 
 
 
