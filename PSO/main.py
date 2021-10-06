@@ -1,4 +1,5 @@
 from Particles import Particles
+import time
 
 # The information
 # sharing mechanism in PSO is significantly
@@ -14,17 +15,8 @@ from Particles import Particles
 # most cases.
 
 
-# Gera as partículas
-# Ordena elas pelo actual_score
-# Substitui o high_score das sub50% pelo highscore das top50%
-# aplica as seguintes substituições de velocidade
-   #  substitui as rainhas atuais de cada partícula pelas rainhas do máximo local com probabilidade c1 de substituição
-   #   substitui as rainhas atuais de cada partícula pelas rainhas de máximo global com probabilidade c2    
-# repete o processo
-
+start  = time.time()
 ps = Particles(9, 5)
-
-
 for i in range(0,1000):
     # ps.rank_particles_by_hig_score()
     # print('ranking das partículas')
@@ -35,3 +27,6 @@ for i in range(0,1000):
 
 ps.rank_particles_by_hig_score()
 ps.particles[0].show_particle()
+end = time.time()
+print('tempo de execução total', (end - start))
+
