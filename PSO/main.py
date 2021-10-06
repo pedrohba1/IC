@@ -14,10 +14,10 @@ from Particles import Particles
 # most cases.
 
 
-# Gera as partíclas
+# Gera as partículas
 # Ordena elas pelo actual_score
-# Subtitui o high_score das sub50% pelo highscore das top50%
-# aplica as segintes substituições de velocidade
+# Substitui o high_score das sub50% pelo highscore das top50%
+# aplica as seguintes substituições de velocidade
    #  substitui as rainhas atuais de cada partícula pelas rainhas do máximo local com probabilidade c1 de substituição
    #   substitui as rainhas atuais de cada partícula pelas rainhas de máximo global com probabilidade c2    
 # repete o processo
@@ -29,5 +29,6 @@ for particle in ps.particles:
     print(particle.actual_score)
 
 
-ps.particles[0].show_particle()
 
+for i in range(0,1000):
+    ps.do_iteration()
