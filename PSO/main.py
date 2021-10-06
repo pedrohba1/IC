@@ -26,10 +26,10 @@ ps = Particles(9, 5)
 
 
 for i in range(0,1000):
-    ps.rank_particles_by_hig_score()
-    print('ranking das partículas')
-    for particle in ps.particles:
-        print(particle.high_score)
+    # ps.rank_particles_by_hig_score()
+    # print('ranking das partículas')
+    # for particle in ps.particles:
+    #     print(particle.high_score)
     ps.do_iteration()
 
 

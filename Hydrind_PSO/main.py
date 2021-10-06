@@ -13,24 +13,14 @@ from Particles import Particles
 # solution quickly even in the local version in
 # most cases.
 
-
-# Gera as partículas
-# Ordena elas pelo actual_score
-# Substitui o high_score das sub50% pelo highscore das top50%
-# aplica as seguintes substituições de velocidade
-   #  substitui as rainhas atuais de cada partícula pelas rainhas do máximo local com probabilidade c1 de substituição
-   #   substitui as rainhas atuais de cada partícula pelas rainhas de máximo global com probabilidade c2    
-# repete o processo
-
 ps = Particles(9, 5)
-
 
 for i in range(0,1000):
     # ps.rank_particles_by_hig_score()
+    # print('ranking das partículas')
     # for particle in ps.particles:
-    #     print(particle.actual_score)
+    #     print(particle.high_score)
     ps.do_iteration()
-
 
 ps.rank_particles_by_hig_score()
 ps.particles[0].show_particle()
