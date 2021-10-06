@@ -1,8 +1,9 @@
 import numpy as np
 from random import seed
 from random import randint
+import time
 
-N = 10
+N = 11
 
 
 def dominatedSet(queens, chessBoard, verbose=False):
@@ -224,6 +225,7 @@ def show_dominated_board(individuo):
 
 def do_iterations(n_iters, n_queens, chessBoard_dimension, verbose=False):
     # constrói o tabuleiro
+    start = time.time()
     N = chessBoard_dimension
     chessBoard = np.array([x+1 for x in range(N*N)])
     chessBoard = chessBoard.reshape(N,N)
@@ -273,5 +275,7 @@ def do_iterations(n_iters, n_queens, chessBoard_dimension, verbose=False):
         print('posição das rainhas do melhor individuo da iteração',A[np.argmax(fitness_values)])
         print('melhor indivíduo total: ', best)
         if verbose: show_dominated_board(A[np.argmax(fitness_values)])
+        end = time.time()
+        print('tempo de execução atual', (end - start))
         i += 1
     return 1

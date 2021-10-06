@@ -1,3 +1,3 @@
 from functions import * 
 
-do_iterations(1000,6,N, verbose=False)
+do_iterations(1000,7,N, verbose=False)
