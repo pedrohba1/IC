@@ -16,7 +16,7 @@ import time
 
 
 start  = time.time()
-ps = Particles(8, 5)
+ps = Particles(11,7)
 for i in range(0,1000):
     # ps.rank_particles_by_hig_score()
     # print('ranking das partículas')
