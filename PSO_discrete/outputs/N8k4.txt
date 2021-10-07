@@ -1,0 +1,25 @@
+
+
+high sore 0.90625
+score atual 0.90625
+rainhas atuais ['00010111' '00100011' '00000001' '00101100']
+rainahs do melhor tabuleiro ['00010111' '00100011' '00000001' '00101100']
+tabuleiro atual:
+[['r' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'D' '13' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'D' 'D' 'D' 'r' 'D']
+ ['D' 'D' 'D' 'D' '29' 'D' 'D' 'D']
+ ['D' 'D' 'r' 'D' 'D' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'r' 'D' 'D' 'D' 'D']
+ ['D' '50' 'D' 'D' 'D' '54' 'D' '56']
+ ['D' 'D' 'D' 'D' '61' 'D' 'D' 'D']]
+tabuleiro do máximo local:
+[['r' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'D' '13' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'D' 'D' 'D' 'r' 'D']
+ ['D' 'D' 'D' 'D' '29' 'D' 'D' 'D']
+ ['D' 'D' 'r' 'D' 'D' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'r' 'D' 'D' 'D' 'D']
+ ['D' '50' 'D' 'D' 'D' '54' 'D' '56']
+ ['D' 'D' 'D' 'D' '61' 'D' 'D' 'D']]
+tempo de execução total 5.198829412460327
