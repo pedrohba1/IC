@@ -1,0 +1,27 @@
+
+
+high sore 1.0
+score atual 0.9135802469135802
+rainhas atuais ['01000111', '00110011', '01001010', '01010001', '00001010', '00101010']
+rainahs do melhor tabuleiro ['00001111', '00110011', '01001010', '00000001', '00111100', '00101010']
+tabuleiro atual:
+[['D' 'D' '3' '4' '5' 'D' '7' 'D' 'D']
+ ['r' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'D' '23' 'D' '25' 'D' 'D']
+ ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'D' 'D' 'r' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'D' 'D' 'r' 'D' 'D' 'D']
+ ['D' 'D' '57' 'D' 'D' 'D' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'r' 'D']
+ ['D' 'r' 'D' 'D' 'D' 'D' 'D' 'D' 'r']]
+tabuleiro do máximo local:
+[['r' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'D' 'D' 'r' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'D' 'D' 'r' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'D' 'D' 'r' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'D' 'D' 'r' 'D' 'D' 'D']
+ ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+ ['D' 'r' 'D' 'D' 'D' 'D' 'D' 'D' 'D']]
+tempo de execução total 8.73620891571045
