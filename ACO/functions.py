@@ -1,10 +1,10 @@
 import numpy as np
 
-# A função abaixo retornar o fitness, que é um valor de 0 ao número de rainhas.
+# A função abaixo retornar o fitness, que é um valor de 0 ao número de rainhas (Nq).
 # O fitness, nesse caso, é dado pelo número de posições no tabuleiro nas quais
 # as raihas posicionadas neles não estarão atacando nenhuma outra. Ou seja, é a
 # restrição do jogo
-# O ideal é encontrar as N posições de forma que nenhuma das rainhas se ataquem,
+# O ideal é encontrar as Nq posições de forma que nenhuma das rainhas se ataquem,
 # então quando mais próximo de N o valor, melhor.
 
 def fitness(queens, board, verbose=True):
