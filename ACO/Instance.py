@@ -24,7 +24,7 @@ class Instance:
 
         # posiciona as N rainhas cada uma em um espaço do tabuleiro, sem que duas estejam na mesma posição
         # as rainhas são um objeto da classe Queen
-        queens_positions = np.random.choice(self.board_positions,size=N, replace=False)    
+        queens_positions = np.random.choice(self.board_positions,size=self.N_queens, replace=False)    
         for queen_position in queens_positions:
             self.queens.append(Queen(queen_position))
         self.G = G
@@ -41,7 +41,10 @@ class Instance:
         # caminho a ser tomado, com base na equação dada no artigo que leva em consideração feromônio e
          #distância 
         
+        
         print (len(fitness(self.queens, self.board)))
+        debug_board([queen.position for queen in self.queens], self.board)
+
         for queen in self.queens:
             ####### calcula o fitness e faz o ajuste nos feromônios
             actual_fitness = len(fitness(self.queens, self.board)) 
