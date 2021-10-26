@@ -1,5 +1,6 @@
 import numpy as np
 from math import sqrt
+
 # A função abaixo retornar o fitness, que é um valor de 0 ao número de rainhas (Nq).
 # O fitness, nesse caso, é dado pelo número de posições no tabuleiro nas quais
 # as raihas posicionadas neles não estarão atacando nenhuma outra. Ou seja, é a

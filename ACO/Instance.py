@@ -15,7 +15,6 @@ class Instance:
         # constrói a instância do problema: seu grafo, com N^2 * N vertices, e suas N^2 * N
         self.board_positions = np.array([x+1 for x in range(N*N)])
         self.board = self.board_positions.reshape(N,N)
-        print(self.board)
         # construção do grafo em que os pesos das arestas são o valor do feromônio (inicializa com 1)
         G = nx.DiGraph()
         for fromNode in self.board_positions:
@@ -41,7 +40,9 @@ class Instance:
         # caminho a ser tomado, com base na equação dada no artigo
         
         
+        fitness(self.queens, self.board) 
         
+        ##### primeiro calcular as probabilidades:
         for queen in self.queens:
             sum_non_visited = 0
             # cria o denominador do cálculo de probabilidade
@@ -52,25 +53,30 @@ class Instance:
             #cria o numerador e anexa ele como dado de um caminho, para cada caminho
             for (from_node, to_node ,data) in self.G.out_edges(queen.position, data=True):
                 if queen.has_visited(to_node):
-                    self.G[from_node][to_node]['probabilty'] = 0
-                else: self.G[from_node][to_node]['probabilty'] = data['pheromone'] * (1 / data['distance'])
+                    self.G[from_node][to_node]['probability'] = 0.0
+                else: self.G[from_node][to_node]['probability'] = data['pheromone'] * (1 / data['distance']) /sum_non_visited
                 
             
+            # checa se a soma das probabilidades dá 1 ou perto disso
             sum_probs = 0
             for (from_node, to_node ,data) in self.G.out_edges(queen.position, data=True):
-                print(from_node, to_node, data)
-                sum_probs += data['probabilty']
-        
+                sum_probs += data['probability'] 
+            
             print(sum_probs)
-            print(sum_non_visited)
-            
-        
-        
-        
-        
-            
-                
-        fitness(self.queens, self.board)
+
+
+            # escolhe um caminho pra rainha             
+            listed_edges = list(self.G.out_edges(queen.position, data=True))
+            path_probs = []
+            for _,_,data in listed_edges:
+                path_probs.append(data['probability'])
+            # escolhe um caminho com base na probabilidade dele:
+            chosen_path_index = np.random.choice(len(listed_edges), p=path_probs)
+            print(listed_edges[chosen_path_index])
+        ########
+
+        # decide por qual caminho cada rainha vai andar:        
+    
 
 
 
