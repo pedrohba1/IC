@@ -10,6 +10,10 @@ class Queen:
     def visit(self, position):
         self.visited.add(position)
         
+        
+    def clear_visited(self):
+        self.visited = set()
+    
     def has_visited(self, position):
         return position in self.visited
 

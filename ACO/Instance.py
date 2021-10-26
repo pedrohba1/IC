@@ -31,8 +31,19 @@ class Instance:
         
         
     def do_tour(self):
-        pass
         
+        # zera os visitados de cada rainha porque é uma nova tour.
+        # em cada tour as rainhas podem percorrer seu caminho livremente1
+        for queen in self.queens:
+            queen.clear_visited()
+        
+        ## faz N_queens iterações
+        for i in range(0, self.N_queens):
+            self.do_iteration()
+        
+    
+    
+    
     
     def do_iteration(self):
         # a rainha (formiga) precisa andar para algum lugar.
@@ -42,13 +53,14 @@ class Instance:
          #distância 
         
         
-        print (len(fitness(self.queens, self.board)))
-        debug_board([queen.position for queen in self.queens], self.board)
+        # print (len(fitness(self.queens, self.board)))
+        # print(fitness(self.queens, self.board))
+        # debug_board([queen.position for queen in self.queens], self.board)
 
         for queen in self.queens:
             ####### calcula o fitness e faz o ajuste nos feromônios
             actual_fitness = len(fitness(self.queens, self.board)) 
-            # print('fitness', actual_fitness)
+            print('fitness', actual_fitness)
             # print(queen.position)
             for (from_node, to_node ,data) in self.G.out_edges(queen.position, data=True):
                 if not queen.has_visited(to_node):
@@ -73,8 +85,9 @@ class Instance:
             # checa se a soma das probabilidades dá 1 ou beeem perto disso
             sum_probs = 0
             for (from_node, to_node ,data) in self.G.out_edges(queen.position, data=True):
+                print(data['probability'])
                 sum_probs += data['probability'] 
-            # print(sum_probs)
+            print(sum_probs)
             ########
 
             ######## escolhe um caminho pra rainha             
@@ -88,8 +101,9 @@ class Instance:
             chosen_path = listed_edges[chosen_path_index]
             # print(chosen_path)
             queen.set_position(chosen_path[1])
+            queen.visit(chosen_path[1])
             ########
-        
+
 
                 
 
