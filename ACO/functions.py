@@ -80,7 +80,10 @@ def debug_board(queens,board):
     axu_board = axu_board.reshape(N,N)
     print('tabuleiro de dominações e rainhas')
     print(axu_board)
-    
+
+
+
+
 
     
               
@@ -138,6 +141,17 @@ def dominated_set(queens, chessBoard, verbose=False):
     return S
 
 
+def closest(lst, K):
+    minim = None
+    for i in lst:
+        aux = abs(i - K)
+        if minim is None:
+            minim = aux
+            result = i
+        if aux < minim:
+            minim = aux
+            result = i
+    return result
 
 
 

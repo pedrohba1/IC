@@ -1,6 +1,6 @@
 import numpy as np
 import networkx as nx
-from functions import fitness, get_distance_between, debug_board
+from functions import fitness, get_distance_between, debug_board, dominated_set
 from Queen import Queen
 import random
 
@@ -12,11 +12,14 @@ class Instance:
         self.N_queens = N_queens
         self.queens = []
         self.board = []
-        self.alpha = 4
-        self.beta = 1
+        self.omega = 2
+        self.alpha = 1.5
+        self.beta = 1.5
         self.board_positions = []        
         self.board_positions = np.array([x+1 for x in range(N*N)])
         self.board = self.board_positions.reshape(N,N)
+        self.best_queens = []
+        self.best_fitness = 0
         
         # construção do grafo em que os pesos das arestas são o valor do feromônio (inicializa com 1)
         G = nx.DiGraph()
@@ -33,7 +36,11 @@ class Instance:
             self.queens.append(Queen(queen_position))
         self.G = G
         
-        
+    def show_best(self):
+        print('melhor fitness', self.best_fitness)
+        debug_board([queen.position for queen in self.best_queens], self.board)
+    
+    
     def do_tour(self):
         # zera os visitados de cada rainha porque é uma nova tour.
         # em cada tour as rainhas podem percorrer seu caminho livremente1
@@ -43,33 +50,33 @@ class Instance:
         ## faz N_queens iterações:
         for i in range(0, self.N_queens):
             self.do_iteration()
-        
-    
-    
-    
-    
+            
     def do_iteration(self):
         # a rainha (formiga) precisa andar para algum lugar.
         # antes dela andar, precisamos calcular o fitness para adicionar
         # ao feromônio e em seguida calcular as probabilidades de cada
         # caminho a ser tomado, com base na equação dada no artigo que leva em consideração feromônio e
-         #distância 
+        # distância 
         
         
-        print (len(fitness(self.queens, self.board)))
+        # print (len(fitness(self.queens, self.board)))
         # print(fitness(self.queens, self.board))
         # debug_board([queen.position for queen in self.queens], self.board)
 
-
-
         for queen in self.queens:
             ####### calcula o fitness e faz o ajuste nos feromônios
-            actual_fitness = len(fitness(self.queens, self.board)) 
-            print('fitness', actual_fitness)
+            
+            S  = dominated_set([queen.position for queen in self.queens], self.board)
+            actual_fitness = (len(S)/ (self.N**2))
+            if actual_fitness > self.best_fitness:
+                self.best_fitness = actual_fitness
+                self.best_queens = self.queens
+
+            print(actual_fitness)
             # print(queen.position)
             for (from_node, to_node ,data) in self.G.out_edges(queen.position, data=True):
                 if not queen.has_visited(to_node):
-                    data['pheromone'] +=  data['pheromone'] + actual_fitness*self.alpha
+                    data['pheromone'] +=  data['pheromone'] + actual_fitness* self.omega
             ########
         
             
@@ -77,21 +84,25 @@ class Instance:
             # cria o denominador do cálculo de probabilidade
             sum_non_visited = 0
             for (from_node, to_node ,data) in self.G.out_edges(queen.position, data=True):
-                if not queen.has_visited(to_node):
+                if not queen.has_visited(to_node) and not to_node in set(queen.position for queen in self.queens):
                     sum_non_visited += (data['pheromone'] ** self.alpha)  * ((1 / data['distance']) ** self.beta)
             
             # cria o numerador e anexa ele como dado de um caminho, para cada caminho
             for (from_node, to_node ,data) in self.G.out_edges(queen.position, data=True):
-                if queen.has_visited(to_node):
-                    self.G[from_node][to_node]['probability'] = 0.0
-                else: self.G[from_node][to_node]['probability'] = (data['pheromone'] ** self.alpha)  * ((1 / data['distance']) ** self.beta) /sum_non_visited
-                
+                if not queen.has_visited(to_node) and not to_node in set(queen.position for queen in self.queens):
+                    self.G[from_node][to_node]['probability'] = (data['pheromone'] ** self.alpha)  * ((1 / data['distance']) ** self.beta) /sum_non_visited
+                else: self.G[from_node][to_node]['probability'] = 0.0
+
             
+            # ABAIXO FUNÇÃO PARA DEBUG
             # checa se a soma das probabilidades dá 1 ou beeem perto disso
-            sum_probs = 0
-            for (from_node, to_node ,data) in self.G.out_edges(queen.position, data=True):
-                print('prob rainha sair de', from_node, ' e ir para', to_node , "{:.7f}".format(data['probability']))
-                sum_probs += data['probability'] 
+            # sum_probs = 0
+            # print('rainhas', [queen.position for queen in self.queens])
+            # for (from_node, to_node ,data) in self.G.out_edges(queen.position, data=True):
+            #     print('visitados da rainha', queen.visited)
+            #     print('prob rainha sair de', from_node, ' e ir para', to_node , "{:.7f}".format(data['probability']))
+            #     sum_probs += data['probability']
+            # print(sum_probs) 
             ########
 
             ######## escolhe um caminho pra rainha             
@@ -108,11 +119,9 @@ class Instance:
             queen.visit(chosen_path[1])
             ########
             
-            
             ### faz a evaporação do feromônio citada no artigo:
             for (from_node, to_node ,data) in self.G.out_edges(queen.position, data=True):
-                        if not queen.has_visited(to_node):
-                            data['pheromone'] +=  data['pheromone']*random.uniform(0,1)
+                    data['pheromone'] = data['pheromone']*random.uniform(0,1)
                 
 
 
