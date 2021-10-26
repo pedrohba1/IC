@@ -20,7 +20,7 @@ class Instance:
         for fromNode in boardArray:
             for toNode in boardArray:   
                 distance = get_distance_between(fromNode, toNode, self.board)
-                G.add_edge(fromNode, toNode, weight=1, distance=distance)
+                G.add_edge(fromNode, toNode, pheromone=1, distance=distance)
         
 
         # posiciona as N rainhas cada uma em um espaço do tabuleiro, sem que duas estejam na mesma posição
@@ -28,12 +28,21 @@ class Instance:
         self.G = G
     
     def do_iteration(self):
-        fitness(self.queens, self.board)
         
-        for u,v,a in self.G.edges(data=True):
-            print (u,v,a)
+        # for u,v,a in self.G.edges(data=True):
+        #     print (u,v,a)
+
         # a rainha (formiga) precisa andar para algum lugar.
-        
+        # antes dela andar, precisamos calcular as probabilidades de cada
+        # caminho a ser tomado, com base na equação dada no artigo
+        for (u,v,t) in self.G.out_edges(1, data=True):
+            print(u,v,t)
+
+        fitness(self.queens, self.board)
+
+
+
+
         
         
         
