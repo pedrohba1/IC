@@ -1,5 +1,5 @@
 import numpy as np
-
+from math import sqrt
 # A função abaixo retornar o fitness, que é um valor de 0 ao número de rainhas (Nq).
 # O fitness, nesse caso, é dado pelo número de posições no tabuleiro nas quais
 # as raihas posicionadas neles não estarão atacando nenhuma outra. Ou seja, é a
@@ -77,9 +77,21 @@ def debug_board(queens,board):
 
     
               
+# para não ter que fazer breadth-frist search e complicar demais, 
+def get_distance_between(position1, position2, board):
+    coord1 = np.where(board == position1)
+    i1 = coord1[0][0]
+    j1 = coord1[1][0]
+    
+    coord2 = np.where(board == position2)
+    i2 = coord2[0][0]
+    j2 = coord2[1][0]
 
+    distance =  sqrt((i1 -i2)**2 + (j1 - j2)**2)
+    if (distance == 0): distance = 1.0
+    return distance
 
-def dominatedSet(queens, chessBoard, verbose=False):
+def dominated_set(queens, chessBoard, verbose=False):
     S = set()
     N = chessBoard.shape[0]
 
