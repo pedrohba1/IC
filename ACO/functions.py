@@ -8,7 +8,10 @@ from math import sqrt
 # então quando mais próximo de N o valor, melhor.
 
 def fitness(queens, board, verbose=True):
-    queens_positions_set = set(queens)
+    queens_positions_set = set()
+    for queen in queens:
+        queens_positions_set.add(queen.position)
+    
     satisfying_positions = set()
     diags = get_all_diags(board)
     all_positions = board.flatten()
