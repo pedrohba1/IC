@@ -41,6 +41,7 @@ def check_position_validity(board, checking_position, queens_positions_set):
         for position in diag:
             if (position in queens_positions_set):
                 return False
+
     return True
              
             

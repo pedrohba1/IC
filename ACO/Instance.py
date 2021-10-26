@@ -10,11 +10,10 @@ class Instance:
         self.N_queens = N_queens
         self.queens = []
         self.board = []
-        self.board_positions = []
-        
-        # constrói a instância do problema: seu grafo, com N^2 * N vertices, e suas N^2 * N
+        self.board_positions = []        
         self.board_positions = np.array([x+1 for x in range(N*N)])
         self.board = self.board_positions.reshape(N,N)
+        
         # construção do grafo em que os pesos das arestas são o valor do feromônio (inicializa com 1)
         G = nx.DiGraph()
         for fromNode in self.board_positions:
@@ -42,11 +41,7 @@ class Instance:
         # caminho a ser tomado, com base na equação dada no artigo que leva em consideração feromônio e
          #distância 
         
-        result = fitness(self.queens, self.board)
-        if len(result) > 6:
-            debug_board(list(fitness(self.queens, self.board)), self.board)
-            print(result)
-        
+        print (len(fitness(self.queens, self.board)))
         for queen in self.queens:
             ####### calcula o fitness e faz o ajuste nos feromônios
             actual_fitness = len(fitness(self.queens, self.board)) 
