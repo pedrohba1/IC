@@ -20,7 +20,8 @@ def fitness(queens, board, verbose=True):
         is_valid = check_position_validity(board,checking_position, queens_positions_set)        
         if (is_valid):
             satisfying_positions.add(checking_position)
-    print(len(satisfying_positions))
+    return satisfying_positions
+    
 
 
 def check_position_validity(board, checking_position, queens_positions_set):
@@ -63,8 +64,9 @@ def debug_board(queens,board):
     arr =  [x+1 for x in range(N*N)]
     print('tabuleiro comum')
     print(board)
+    
 
-    dominated = dominatedSet(queens, board)
+    dominated = dominated_set(queens, board)
     for dominated_pos in list(dominated):
         arr[dominated_pos-1] = 'D'
 

@@ -13,6 +13,8 @@ class Queen:
     def has_visited(self, position):
         return position in self.visited
 
+    def set_position(self, position):
+        self.position = position
 
 
         
