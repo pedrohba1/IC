@@ -99,8 +99,9 @@ class Instance:
             # sum_probs = 0
             # print('rainhas', [queen.position for queen in self.queens])
             # for (from_node, to_node ,data) in self.G.out_edges(queen.position, data=True):
-            #     print('visitados da rainha', queen.visited)
+            #     # print('visitados da rainha', queen.visited)
             #     print('prob rainha sair de', from_node, ' e ir para', to_node , "{:.7f}".format(data['probability']))
+            #     print( 'distancia ', data['distance'])
             #     sum_probs += data['probability']
             # print(sum_probs) 
             ########

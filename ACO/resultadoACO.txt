@@ -1,0 +1,29 @@
+8NQ3: 
+melhor fitness 0.859375
+
+8NQ4:
+melhor fitness 0.953125
+
+8NQ5:
+melhor fitness 1.0
+
+9NQ5:
+melhor fitness 0.9753086419753086
+
+9NQ6:
+melhor fitness 1.0
+
+10NQ5:
+melhor fitness 0.98
+
+10NQ6:
+melhor fitness 0.98
+
+10NQ7:
+melhor fitness 1.0
+
+11NQ6:
+melhor fitness 0.96
+
+10NQ7:
+melhor fitness 0,98

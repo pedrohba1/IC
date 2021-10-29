@@ -2,7 +2,7 @@ from Instance import Instance
 from functions import dominated_set, debug_board
 
 N = 8
-N_queens = 3
+N_queens = 5
 
 instance = Instance(N, N_queens)
 
