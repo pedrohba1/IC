@@ -225,6 +225,8 @@ def show_dominated_board(individuo):
 
 def do_iterations(n_iters, n_queens, chessBoard_dimension, verbose=False):
     # constrói o tabuleiro
+    import tracemalloc
+    tracemalloc.start()
     start = time.time()
     N = chessBoard_dimension
     chessBoard = np.array([x+1 for x in range(N*N)])
@@ -276,6 +278,95 @@ def do_iterations(n_iters, n_queens, chessBoard_dimension, verbose=False):
         print('melhor indivíduo total: ', best)
         if verbose: show_dominated_board(A[np.argmax(fitness_values)])
         end = time.time()
+        current, peak = tracemalloc.get_traced_memory()
+        print(f"Current memory usage is {current / 10**6}MB; Peak was {peak / 10**6}MB")
         print('tempo de execução atual', (end - start))
         i += 1
+    tracemalloc.stop()
     return 1
+
+
+#n8k3
+# [['D' 'D' '3' 'D' '5' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' '13' 'D' 'D' '16']
+#  ['D' '18' 'D' 'D' 'D' 'D' '23' 'D']
+#  ['D' 'D' 'D' 'r' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'r' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' '48']
+#  ['D' 'D' '51' 'D' '53' 'D' 'D' 'D']
+#  ['r' 'D' 'D' 'D' 'D' 'D' 'D' 'D']]
+
+
+#n8k4
+# [['r' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' '15' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'r' 'D' 'D']
+#  ['D' 'r' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' '45' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'r']
+#  ['D' 'D' '59' '60' 'D' 'D' 'D' 'D']]
+
+
+#n8k5
+# [['D' 'D' 'D' 'D' 'D' 'D' 'r' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'r' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'r' 'D' 'D']
+#  ['r' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'r' 'D' 'D' 'D' 'D']]
+
+
+
+#n9k5
+
+# [['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'r' 'D' 'D' 'D' 'D' 'r' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' '33' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' '42' 'D' 'D' 'D']
+#  ['r' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'r']
+#  ['D' 'D' 'D' 'D' 'r' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' '80' 'D']]
+
+#n9k6
+# [['D' 'r' 'D' 'r' 'D' 'D' 'D' 'D' 'r']
+#  ['D' 'D' 'D' 'D' 'D' 'r' 'D' 'D' 'D']
+#  ['19' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' '43' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'r' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'r' 'D' 'D' 'D' 'D']]
+
+
+#N10k5
+
+# [['D' 'D' 'D' 'D' 'D' 'D' 'D' 'r' 'D' 'D']
+#  ['11' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'r' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' '36' '37' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'r' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['61' 'D' '63' 'D' 'D' 'D' 'D' 'D' 'D' '70']
+#  ['D' 'D' 'D' 'D' 'r' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' '87' 'D' 'D' 'D']
+#  ['D' 'r' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']]
+
+
+#n11k6
+# [['D' 'D' 'D' 'r' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['12' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['23' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'r' 'r' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'r' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'r' 'D' 'D' 'D']
+#  ['89' 'D' 'D' 'D' 'D' '94' 'D' 'D' 'D' 'D' 'D']
+#  ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'r']
+#  ['D' 'D' '113' 'D' 'D' '116' 'D' 'D' 'D' 'D' 'D']]
